@@ -3,6 +3,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.UseMsAccess();
+builder.Services.AddUseCases();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

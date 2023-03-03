@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FilmsPhilippe.Infrastructure.MSAccess\FilmsPhilippe.Infrastructure.MSAccess.csproj" />
+  </ItemGroup>
+
 </Project>
