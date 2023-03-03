@@ -20,7 +20,7 @@ internal class MovieRepository : IMovieRepository
 
     public IEnumerable<Movie> List()
     {
-        OdbcCommand command = new("SELECT TOP 10 TITRE, TITRE_OR, ANNEE FROM FILM");
+        OdbcCommand command = new("SELECT TITRE, TITRE_OR, ANNEE FROM FILM");
 
         using OdbcConnection connection = new(_connectionString);
         command.Connection = connection;

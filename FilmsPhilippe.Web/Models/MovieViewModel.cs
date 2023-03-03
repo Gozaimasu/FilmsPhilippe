@@ -1,9 +1,7 @@
-﻿using FilmsPhilippe.Domain.Models;
-
-namespace FilmsPhilippe.Web.Models;
+﻿namespace FilmsPhilippe.Web.Models;
 
 public class MovieViewModel
 {
-    public List<Movie> Movies { get; set; } = default!;
+    public PaginatedList<Movie> Movies { get; set; } = default!;
     public string? SearchString { get; set; }
 }

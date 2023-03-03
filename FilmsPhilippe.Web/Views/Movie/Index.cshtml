@@ -1,49 +1,67 @@
 ﻿@model FilmsPhilippe.Web.Models.MovieViewModel
 
 @{
-    ViewData["Title"] = "Index";
+	ViewData["Title"] = "Index";
 }
 
 <h1>Index</h1>
 
 <form>
-    <p>
-        Title: <input type="text" asp-for="SearchString" />
-        <input type="submit" value="Filter" />
-    </p>
+	<p>
+		Title: <input type="text" asp-for="SearchString" />
+		<input type="submit" value="Filter" />
+	</p>
 </form>
 
 <table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Movies[0].Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Movies[0].OriginalTitle)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Movies[0].ReleaseDate)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Movies)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.OriginalTitle)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ReleaseDate)
-                </td>
-                <td>
-                </td>
-            </tr>
-        }
-    </tbody>
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Movies[0].Title)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Movies[0].OriginalTitle)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Movies[0].ReleaseDate)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model.Movies)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Title)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.OriginalTitle)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.ReleaseDate)
+				</td>
+				<td>
+				</td>
+			</tr>
+		}
+	</tbody>
 </table>
+
+@{
+	var prevDisabled = !Model.Movies.HasPreviousPage ? "disabled" : "";
+	var nextDisabled = !Model.Movies.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-pageNumber="@(Model.Movies.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @prevDisabled">
+	Previous
+</a>
+<a asp-action="Index"
+   asp-route-pageNumber="@(Model.Movies.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @nextDisabled">
+	Next
+</a>
