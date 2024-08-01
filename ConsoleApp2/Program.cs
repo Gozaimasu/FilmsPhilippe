@@ -1,0 +1,61 @@
+﻿using ConsoleApp2;
+using ConsoleApp2.Models;
+using ConsoleApp2.Processes;
+using System.Data.Odbc;
+using static ConsoleApp2.Processes.AddActorDefaults;
+using static ConsoleApp2.Processes.AddDirectorDefaults;
+using static ConsoleApp2.Processes.FormatMovieDefaults;
+using static ConsoleApp2.Processes.FormatNameDefaults;
+using static ConsoleApp2.Processes.FormatNameListDefaults;
+
+var connectionString = "Driver={Microsoft Access Driver (*.mdb, *.accdb)}; Dbq=D:\\.net\\FilmsPhilippe\\Databases\\newfilms.accdb; Uid = Admin; Pwd =; ";
+
+var movies = GetMovies(connectionString);
+
+var namesFormatter = CommaSeparatedNames.Apply(FormatAcademic);
+var movieFormatter = TitleThenNames.Apply(namesFormatter);
+
+movies
+    .Select(movieFormatter.Invoke)
+    .Select((movie, offset) => $"{(offset + 1)}. {movie}")
+    .ForEach(Console.WriteLine);
+
+static IEnumerable<MovieType> GetMovies(string connectionString)
+{
+    OdbcCommand command = new("SELECT TITRE, REALISAT_1, REALISAT_2, ACTEUR_1, ACTEUR_2, ACTEUR_3, ACTEUR_4, ACTEUR_5, ACTEUR_6, ACTEUR_7, ACTEUR_8, ACTEUR_9, ACTEUR_10, ACTEUR_11, ACTEUR_12, ACTEUR_13, ACTEUR_14, ACTEUR_15, ACTEUR_16 FROM FILM");
+
+    using OdbcConnection connection = new(connectionString);
+    command.Connection = connection;
+    connection.Open();
+
+    var reader = command.ExecuteReader();
+
+    int count = 0;
+    while (reader.Read())
+    {
+        var title = Title.Create(reader.GetString(0));
+        if (title is null) continue;
+
+        var movie = Movie.Create(title, [], []);
+
+        for (int i = 1; i < 3; i++)
+        {
+            var name = Name.Create(reader.GetNullableString(i));
+            if (name is null) break;
+            movie = AddUniqueDirector(movie, name);
+        }
+
+        for (int i = 3; i < 19; i++)
+        {
+            var name = Name.Create(reader.GetNullableString(i));
+            if (name is null) break;
+            movie = AddUniqueActor(movie, name);
+        }
+
+        yield return movie;
+        count++;
+
+        if (count == 10)
+            yield break;
+    }
+}

@@ -7,11 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilmsPhilippe.Web", "FilmsP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{A15F4241-98A5-41B1-8B03-4E358F56567B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilmsPhilippe.Domain", "FilmsPhilippe.Domain\FilmsPhilippe.Domain.csproj", "{B124E914-13E0-4793-B965-E866E50E2378}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilmsPhilippe.Domain", "FilmsPhilippe.Domain\FilmsPhilippe.Domain.csproj", "{B124E914-13E0-4793-B965-E866E50E2378}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilmsPhilippe.Application", "FilmsPhilippe.Application\FilmsPhilippe.Application.csproj", "{47940634-162A-41B2-86CC-F4A214D9343C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilmsPhilippe.Application", "FilmsPhilippe.Application\FilmsPhilippe.Application.csproj", "{47940634-162A-41B2-86CC-F4A214D9343C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilmsPhilippe.Infrastructure.MSAccess", "FilmsPhilippe.Infrastructure.MSAccess\FilmsPhilippe.Infrastructure.MSAccess.csproj", "{C3B33E68-ED13-43FC-A0AA-7048BB9484B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilmsPhilippe.Infrastructure.MSAccess", "FilmsPhilippe.Infrastructure.MSAccess\FilmsPhilippe.Infrastructure.MSAccess.csproj", "{C3B33E68-ED13-43FC-A0AA-7048BB9484B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp2", "ConsoleApp2\ConsoleApp2.csproj", "{3DF11D1E-0FF0-401D-9BAE-69B6F809EC44}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{C3B33E68-ED13-43FC-A0AA-7048BB9484B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3B33E68-ED13-43FC-A0AA-7048BB9484B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3B33E68-ED13-43FC-A0AA-7048BB9484B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DF11D1E-0FF0-401D-9BAE-69B6F809EC44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DF11D1E-0FF0-401D-9BAE-69B6F809EC44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DF11D1E-0FF0-401D-9BAE-69B6F809EC44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DF11D1E-0FF0-401D-9BAE-69B6F809EC44}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

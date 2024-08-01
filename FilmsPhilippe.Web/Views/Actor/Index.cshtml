@@ -1,0 +1,55 @@
+﻿@model FilmsPhilippe.Web.Models.ActorViewModel
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<form>
+	<p>
+		Title: <input type="text" asp-for="SearchString" />
+		<input type="submit" value="Filter" />
+	</p>
+</form>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Actors[0].Name)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model.Actors)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Name)
+				</td>
+				<td>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+
+@{
+	var prevDisabled = !Model.Actors.HasPreviousPage ? "disabled" : "";
+	var nextDisabled = !Model.Actors.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-pageNumber="@(Model.Actors.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @prevDisabled">
+	Previous
+</a>
+<a asp-action="Index"
+   asp-route-pageNumber="@(Model.Actors.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @nextDisabled">
+	Next
+</a>

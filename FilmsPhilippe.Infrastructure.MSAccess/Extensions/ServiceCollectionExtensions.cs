@@ -7,6 +7,8 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection UseMsAccess(this IServiceCollection services)
     {
-        return services.AddScoped<IMovieRepository, MovieRepository>();
+        return services
+            .AddScoped<IMovieRepository, MovieRepository>()
+            .AddScoped<IActorRepository, ActorRepository>();
     }
 }

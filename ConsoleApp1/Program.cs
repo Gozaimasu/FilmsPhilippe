@@ -2,7 +2,7 @@
 
 using System.Data.Odbc;
 
-var connectionString = "Driver={Microsoft Access Driver (*.mdb, *.accdb)}; Dbq=Z:\\.net\\FilmsPhilippe\\Databases\\newfilms.accdb; Uid = Admin; Pwd =; ";
+var connectionString = "Driver={Microsoft Access Driver (*.mdb, *.accdb)}; Dbq=D:\\.net\\FilmsPhilippe\\Databases\\newfilms.accdb; Uid = Admin; Pwd =; ";
 
 string query = GetSelectMovieQuery("TITO ET MOI");
 RunQuery(query);

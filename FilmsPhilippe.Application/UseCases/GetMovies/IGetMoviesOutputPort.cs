@@ -1,8 +1,6 @@
-﻿using FilmsPhilippe.Domain.Models;
-
-namespace FilmsPhilippe.Application.UseCases.GetMovies;
+﻿namespace FilmsPhilippe.Application.UseCases.GetMovies;
 
 public interface IGetMoviesOutputPort
 {
-    void Ok(IEnumerable<Movie> movie);
+    void Ok(IEnumerable<Domain.Models.Movie> movie);
 }
