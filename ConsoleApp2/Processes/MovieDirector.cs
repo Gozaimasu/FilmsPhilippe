@@ -1,20 +1,10 @@
-﻿using ConsoleApp2.Models;
-
-namespace ConsoleApp2.Processes;
-
-public delegate MovieType AddDirector(MovieType movie, NameType director);
-
-public static class AddDirectorExtensions
-{
-    public static Func<NameType, MovieType> Apply(this AddDirector strategy, MovieType movie) =>
-        director => strategy(movie, director);
-}
+﻿namespace ConsoleApp2.Processes;
 
 public static class AddDirectorDefaults
 {
-    public static AddDirector AddAnyDirector => (movie, director) =>
+    public static AddParticipant AddAnyDirector => (movie, director) =>
         movie with { Directors = [.. movie.Directors, director] };
-    public static AddDirector AddUniqueDirector => (movie, director) =>
+    public static AddParticipant AddUniqueDirector => (movie, director) =>
         movie.Directors.Contains(director)
         ? movie
         : movie with { Directors = [.. movie.Directors, director] };
