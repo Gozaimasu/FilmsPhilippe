@@ -5,6 +5,7 @@ using System.Data.Odbc;
 using static ConsoleApp2.Processes.AddActorDefaults;
 using static ConsoleApp2.Processes.AddDirectorDefaults;
 using static ConsoleApp2.Processes.AddScriptwriterDefaults;
+using static ConsoleApp2.Processes.AddAssistantDirectorDefaults;
 
 var connectionString = "Driver={Microsoft Access Driver (*.mdb, *.accdb)}; Dbq=D:\\.net\\FilmsPhilippe\\Databases\\newfilms.accdb; Uid = Admin; Pwd =; ";
 
@@ -24,10 +25,11 @@ Console.WriteLine($"Il y a {directors.Distinct().Count():n0} r√©alisateurs diff√
 
 static IEnumerable<MovieType> GetMovies(string connectionString)
 {
-    OdbcCommand command = new("SELECT TITRE, ANNEE, ORIGINE, MINUTAGE, TITRE_OR, REALISAT_1, REALISAT_2, ACTEUR_1, ACTEUR_2, ACTEUR_3, ACTEUR_4, ACTEUR_5, ACTEUR_6, ACTEUR_7, ACTEUR_8, ACTEUR_9, ACTEUR_10, ACTEUR_11, ACTEUR_12, ACTEUR_13, ACTEUR_14, ACTEUR_15, ACTEUR_16, SCENARIO, SCENARIO1 FROM FILM");
+    OdbcCommand command = new("SELECT TITRE, ANNEE, ORIGINE, MINUTAGE, TITRE_OR, REALISAT_1, REALISAT_2, ACTEUR_1, ACTEUR_2, ACTEUR_3, ACTEUR_4, ACTEUR_5, ACTEUR_6, ACTEUR_7, ACTEUR_8, ACTEUR_9, ACTEUR_10, ACTEUR_11, ACTEUR_12, ACTEUR_13, ACTEUR_14, ACTEUR_15, ACTEUR_16, SCENARIO, SCENARIO1, ASS_REAL_1, ASS_REAL_2, ASS_REAL_3 FROM FILM");
     const int nbDirectors = 2;
     const int nbActors = 16;
-    const int nbScenarists = 2;
+    const int nbScriptwriters = 2;
+    const int nbAssistantDirectors = 3;
 
     using OdbcConnection connection = new(connectionString);
     command.Connection = connection;
@@ -64,9 +66,13 @@ static IEnumerable<MovieType> GetMovies(string connectionString)
         names.ForEach(actor => movie = AddUniqueActor(movie, actor));
         offset += nbActors;
 
-        names = GetNames(reader, offset, nbScenarists);
+        names = GetNames(reader, offset, nbScriptwriters);
         names.ForEach(scriptwriter => movie = AddUniqueScriptwriter(movie, scriptwriter));
-        offset += nbScenarists;
+        offset += nbScriptwriters;
+
+        names = GetNames(reader, offset, nbAssistantDirectors);
+        names.ForEach(assistantDirector => movie = AddUniqueAssistantDirector(movie, assistantDirector));
+        offset += nbAssistantDirectors;
 
         yield return movie;
     }
