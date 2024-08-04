@@ -22,7 +22,7 @@ Console.WriteLine($"Il y a {directors.Distinct().Count():n0} r√©alisateurs diff√
 
 static IEnumerable<MovieType> GetMovies(string connectionString)
 {
-    OdbcCommand command = new("SELECT TITRE, ANNEE, TITRE_OR, REALISAT_1, REALISAT_2, ACTEUR_1, ACTEUR_2, ACTEUR_3, ACTEUR_4, ACTEUR_5, ACTEUR_6, ACTEUR_7, ACTEUR_8, ACTEUR_9, ACTEUR_10, ACTEUR_11, ACTEUR_12, ACTEUR_13, ACTEUR_14, ACTEUR_15, ACTEUR_16 FROM FILM");
+    OdbcCommand command = new("SELECT TITRE, ANNEE, ORIGINE, MINUTAGE, TITRE_OR, REALISAT_1, REALISAT_2, ACTEUR_1, ACTEUR_2, ACTEUR_3, ACTEUR_4, ACTEUR_5, ACTEUR_6, ACTEUR_7, ACTEUR_8, ACTEUR_9, ACTEUR_10, ACTEUR_11, ACTEUR_12, ACTEUR_13, ACTEUR_14, ACTEUR_15, ACTEUR_16 FROM FILM");
     const int nbDirectors = 2;
     const int nbActors = 16;
 
@@ -41,10 +41,17 @@ static IEnumerable<MovieType> GetMovies(string connectionString)
         var year = Year.Create(reader.GetInt32(offset++));
         if (year is null) continue;
 
-        var movie = Movie.Create(title, year, [], []);
+        var origin = Country.Create(reader.GetNullableString(offset++));
+        if (origin is null) continue;
+
+        var minutes = reader.GetInt32(offset++);
+        if (minutes < 0) continue;
+        var minutage = TimeSpan.FromMinutes(minutes);
+
+        var movie = Movie.Create(title, year, origin, minutage, [], []);
 
         var originalTitle = Title.Create(reader.GetNullableString(offset++));
-        if(originalTitle is not null) movie = movie with { OriginalTitle = originalTitle };
+        if (originalTitle is not null) movie = movie with { OriginalTitle = originalTitle };
 
         var offsetDirectors = offset;
         for (int i = 0; i < nbDirectors; i++)
