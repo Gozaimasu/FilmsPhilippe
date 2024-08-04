@@ -6,6 +6,11 @@ public record MovieType(TitleType Title, YearType Year, CountryType Origin, Time
     public TitleType? OriginalTitle { get; init; }
     public NameType[] ScriptWriters { get; init; } = [];
     public NameType[] AssistantDirectors { get; init; } = [];
+    public NameType[] OriginalWriters { get; init; } = [];
+    public NameType[] Photographers { get; init; } = [];
+    public NameType[] DialogueWriters { get; init; } = [];
+    public NameType[] Editing { get; init; } = [];
+    public NameType[] Music { get; init; } = [];
 }
 
 public static class Movie

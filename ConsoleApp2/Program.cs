@@ -3,9 +3,14 @@ using ConsoleApp2.Models;
 using System.Data.Common;
 using System.Data.Odbc;
 using static ConsoleApp2.Processes.AddActorDefaults;
-using static ConsoleApp2.Processes.AddDirectorDefaults;
-using static ConsoleApp2.Processes.AddScriptwriterDefaults;
 using static ConsoleApp2.Processes.AddAssistantDirectorDefaults;
+using static ConsoleApp2.Processes.AddDialogWriterDefaults;
+using static ConsoleApp2.Processes.AddDirectorDefaults;
+using static ConsoleApp2.Processes.AddEditingDefaults;
+using static ConsoleApp2.Processes.AddMusicDefaults;
+using static ConsoleApp2.Processes.AddOriginalWriterDefaults;
+using static ConsoleApp2.Processes.AddPhotographerDefaults;
+using static ConsoleApp2.Processes.AddScriptwriterDefaults;
 
 var connectionString = "Driver={Microsoft Access Driver (*.mdb, *.accdb)}; Dbq=D:\\.net\\FilmsPhilippe\\Databases\\newfilms.accdb; Uid = Admin; Pwd =; ";
 
@@ -25,7 +30,7 @@ Console.WriteLine($"Il y a {directors.Distinct().Count():n0} r√©alisateurs diff√
 
 static IEnumerable<MovieType> GetMovies(string connectionString)
 {
-    OdbcCommand command = new("SELECT TITRE, ANNEE, ORIGINE, MINUTAGE, TITRE_OR, REALISAT_1, REALISAT_2, ACTEUR_1, ACTEUR_2, ACTEUR_3, ACTEUR_4, ACTEUR_5, ACTEUR_6, ACTEUR_7, ACTEUR_8, ACTEUR_9, ACTEUR_10, ACTEUR_11, ACTEUR_12, ACTEUR_13, ACTEUR_14, ACTEUR_15, ACTEUR_16, SCENARIO, SCENARIO1, ASS_REAL_1, ASS_REAL_2, ASS_REAL_3 FROM FILM");
+    OdbcCommand command = new("SELECT TITRE, ANNEE, ORIGINE, MINUTAGE, TITRE_OR, REALISAT_1, REALISAT_2, ACTEUR_1, ACTEUR_2, ACTEUR_3, ACTEUR_4, ACTEUR_5, ACTEUR_6, ACTEUR_7, ACTEUR_8, ACTEUR_9, ACTEUR_10, ACTEUR_11, ACTEUR_12, ACTEUR_13, ACTEUR_14, ACTEUR_15, ACTEUR_16, SCENARIO, SCENARIO1, ASS_REAL_1, ASS_REAL_2, ASS_REAL_3, D_APRES, DIALOGUE, PHOTO, MONTAGE, MUSIQUE FROM FILM");
     const int nbDirectors = 2;
     const int nbActors = 16;
     const int nbScriptwriters = 2;
@@ -73,6 +78,26 @@ static IEnumerable<MovieType> GetMovies(string connectionString)
         names = GetNames(reader, offset, nbAssistantDirectors);
         names.ForEach(assistantDirector => movie = AddUniqueAssistantDirector(movie, assistantDirector));
         offset += nbAssistantDirectors;
+
+        names = GetNames(reader, offset, 1);
+        names.ForEach(basedOn => movie = AddUniqueOriginalWriter(movie, basedOn));
+        offset++;
+
+        names = GetNames(reader, offset, 1);
+        names.ForEach(dialogWriter => movie = AddUniqueDialogWriter(movie, dialogWriter));
+        offset++;
+
+        names = GetNames(reader, offset, 1);
+        names.ForEach(photographer => movie = AddUniquePhotographer(movie, photographer));
+        offset++;
+
+        names = GetNames(reader, offset, 1);
+        names.ForEach(editing => movie = AddUniqueEditing(movie, editing));
+        offset++;
+
+        names = GetNames(reader, offset, 1);
+        names.ForEach(music => movie = AddUniqueMusic(movie, music));
+        offset++;
 
         yield return movie;
     }
