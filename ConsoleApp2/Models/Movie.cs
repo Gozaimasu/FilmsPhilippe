@@ -10,4 +10,6 @@ public static class Movie
 {
     public static MovieType Create(TitleType title, YearType year, CountryType country, TimeSpan duration, NameType[] directors, NameType[] actors) =>
         new(title, year, country, duration, directors, actors);
+    public static MovieType Create(TitleType title, YearType year, CountryType country, TimeSpan duration) =>
+        new(title, year, country, duration, [], []);
 }

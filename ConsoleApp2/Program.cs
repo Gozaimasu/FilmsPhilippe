@@ -48,7 +48,7 @@ static IEnumerable<MovieType> GetMovies(string connectionString)
         if (minutes < 0) continue;
         var minutage = TimeSpan.FromMinutes(minutes);
 
-        var movie = Movie.Create(title, year, origin, minutage, [], []);
+        var movie = Movie.Create(title, year, origin, minutage);
 
         var originalTitle = Title.Create(reader.GetNullableString(offset++));
         if (originalTitle is not null) movie = movie with { OriginalTitle = originalTitle };
