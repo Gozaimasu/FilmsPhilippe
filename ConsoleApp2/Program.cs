@@ -12,13 +12,25 @@ var connectionString = "Driver={Microsoft Access Driver (*.mdb, *.accdb)}; Dbq=D
 
 var movies = GetMovies(connectionString);
 
-var namesFormatter = CommaSeparatedNames.Apply(FormatAcademic);
-var movieFormatter = TitleThenNames.Apply(namesFormatter);
+//var namesFormatter = CommaSeparatedNames.Apply(FormatAcademic);
+//var movieFormatter = TitleThenNames.Apply(namesFormatter);
 
-movies
-    .Select(movieFormatter.Invoke)
-    .Select((movie, offset) => $"{(offset + 1)}. {movie}")
-    .ForEach(Console.WriteLine);
+//movies
+//    .Select(movieFormatter.Invoke)
+//    .Select((movie, offset) => $"{(offset + 1)}. {movie}")
+//    .ForEach(Console.WriteLine);
+
+Console.WriteLine($"Il y a {movies.Count():n0} films");
+Console.WriteLine();
+
+var actors = movies.SelectMany(m => m.Actors);
+Console.WriteLine($"Il y a {actors.Count():n0} acteurs");
+Console.WriteLine($"Il y a {actors.Distinct().Count():n0} acteurs différents");
+Console.WriteLine();
+
+var directors = movies.SelectMany(m => m.Directors);
+Console.WriteLine($"Il y a {directors.Count():n0} réalisateurs");
+Console.WriteLine($"Il y a {directors.Distinct().Count():n0} réalisateurs différents");
 
 static IEnumerable<MovieType> GetMovies(string connectionString)
 {
@@ -30,7 +42,6 @@ static IEnumerable<MovieType> GetMovies(string connectionString)
 
     var reader = command.ExecuteReader();
 
-    int count = 0;
     while (reader.Read())
     {
         var title = Title.Create(reader.GetString(0));
@@ -53,9 +64,5 @@ static IEnumerable<MovieType> GetMovies(string connectionString)
         }
 
         yield return movie;
-        count++;
-
-        if (count == 10)
-            yield break;
     }
 }
