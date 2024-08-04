@@ -1,5 +1,6 @@
 ﻿using ConsoleApp2;
 using ConsoleApp2.Models;
+using System.Data.Common;
 using System.Data.Odbc;
 using static ConsoleApp2.Processes.AddActorDefaults;
 using static ConsoleApp2.Processes.AddDirectorDefaults;
@@ -54,23 +55,25 @@ static IEnumerable<MovieType> GetMovies(string connectionString)
         if (originalTitle is not null) movie = movie with { OriginalTitle = originalTitle };
 
         var offsetDirectors = offset;
-        for (int i = 0; i < nbDirectors; i++)
-        {
-            var name = Name.Create(reader.GetNullableString(offset++));
-            if (name is null) break;
-            movie = AddUniqueDirector(movie, name);
-        }
+        var directors = GetNames(reader, offset, nbDirectors);
+        directors.ForEach(director => movie = AddUniqueDirector(movie, director));
         offset = offsetDirectors + nbDirectors;
 
         var offsetActors = offset;
-        for (int i = 0; i < nbActors; i++)
-        {
-            var name = Name.Create(reader.GetNullableString(offset++));
-            if (name is null) break;
-            movie = AddUniqueActor(movie, name);
-        }
+        var actors = GetNames(reader, offset, nbDirectors);
+        directors.ForEach(actor => movie = AddUniqueActor(movie, actor));
         offset = offsetActors + nbActors;
 
         yield return movie;
+    }
+}
+
+static IEnumerable<NameType> GetNames(DbDataReader reader, int offset, int maxCount)
+{
+    for (int i = 0; i < maxCount; i++)
+    {
+        var name = Name.Create(reader.GetNullableString(offset++));
+        if (name is null) yield break;
+        yield return name;
     }
 }
