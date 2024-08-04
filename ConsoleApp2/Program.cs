@@ -34,7 +34,7 @@ Console.WriteLine($"Il y a {directors.Distinct().Count():n0} r√©alisateurs diff√
 
 static IEnumerable<MovieType> GetMovies(string connectionString)
 {
-    OdbcCommand command = new("SELECT TITRE, REALISAT_1, REALISAT_2, ACTEUR_1, ACTEUR_2, ACTEUR_3, ACTEUR_4, ACTEUR_5, ACTEUR_6, ACTEUR_7, ACTEUR_8, ACTEUR_9, ACTEUR_10, ACTEUR_11, ACTEUR_12, ACTEUR_13, ACTEUR_14, ACTEUR_15, ACTEUR_16 FROM FILM");
+    OdbcCommand command = new("SELECT TITRE, TITRE_OR, REALISAT_1, REALISAT_2, ACTEUR_1, ACTEUR_2, ACTEUR_3, ACTEUR_4, ACTEUR_5, ACTEUR_6, ACTEUR_7, ACTEUR_8, ACTEUR_9, ACTEUR_10, ACTEUR_11, ACTEUR_12, ACTEUR_13, ACTEUR_14, ACTEUR_15, ACTEUR_16 FROM FILM");
 
     using OdbcConnection connection = new(connectionString);
     command.Connection = connection;
@@ -49,14 +49,17 @@ static IEnumerable<MovieType> GetMovies(string connectionString)
 
         var movie = Movie.Create(title, [], []);
 
-        for (int i = 1; i < 3; i++)
+        var originalTitle = Title.Create(reader.GetString(1));
+        if(originalTitle is not null) movie = movie with { OriginalTitle = originalTitle };
+
+        for (int i = 2; i < 4; i++)
         {
             var name = Name.Create(reader.GetNullableString(i));
             if (name is null) break;
             movie = AddUniqueDirector(movie, name);
         }
 
-        for (int i = 3; i < 19; i++)
+        for (int i = 4; i < 20; i++)
         {
             var name = Name.Create(reader.GetNullableString(i));
             if (name is null) break;
