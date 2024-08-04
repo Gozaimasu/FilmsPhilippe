@@ -13,7 +13,7 @@ public static class AddActorExtensions
 public static class AddActorDefaults
 {
     public static AddActor AddAnyActor => (movie, actor) =>
-        movie with { Directors = [.. movie.Directors, actor] };
+        movie with { Actors = [.. movie.Actors, actor] };
     public static AddActor AddUniqueActor => (movie, actor) =>
         movie.Actors.Contains(actor)
         ? movie
