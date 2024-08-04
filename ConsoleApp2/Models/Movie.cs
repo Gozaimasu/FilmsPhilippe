@@ -4,6 +4,7 @@ namespace ConsoleApp2.Models;
 public record MovieType(TitleType Title, YearType Year, CountryType Origin, TimeSpan Duration, NameType[] Directors, NameType[] Actors)
 {
     public TitleType? OriginalTitle { get; init; }
+    public NameType[] ScriptWriters { get; init; } = [];
 }
 
 public static class Movie
