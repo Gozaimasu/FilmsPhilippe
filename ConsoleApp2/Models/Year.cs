@@ -6,5 +6,5 @@ public static class Year
 {
     public static YearType? Create(uint value) => new(value);
     public static YearType? Create(int value) =>
-        value < 0 ? null : new((uint)value);
+        value < 0 ? null : new YearType((uint)value);
 }

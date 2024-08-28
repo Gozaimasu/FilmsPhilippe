@@ -1,6 +1,5 @@
 ﻿using ConsoleApp2;
 using ConsoleApp2.Models;
-using ConsoleApp2.Processes;
 using System.Data.Common;
 using System.Data.Odbc;
 using static ConsoleApp2.Processes.AddActorDefaults;
@@ -13,21 +12,27 @@ using static ConsoleApp2.Processes.AddOriginalWriterDefaults;
 using static ConsoleApp2.Processes.AddPhotographerDefaults;
 using static ConsoleApp2.Processes.AddScriptwriterDefaults;
 
-var connectionString = "Driver={Microsoft Access Driver (*.mdb, *.accdb)}; Dbq=D:\\.net\\FilmsPhilippe\\Databases\\newfilms.accdb; Uid = Admin; Pwd =; ";
+const string connectionString = @"Driver={Microsoft Access Driver (*.mdb, *.accdb)}; Dbq=D:\.net\FilmsPhilippe\Databases\newfilms.accdb; Uid = Admin; Pwd =; ";
 
-var movies = GetMovies(connectionString);
+var movies = GetMovies(connectionString).ToList();
 
-Console.WriteLine($"Il y a {movies.Count():n0} films");
+Console.WriteLine($"Il y a {movies.Count:n0} films");
 Console.WriteLine();
 
-var actors = movies.SelectMany(m => m.Actors);
-Console.WriteLine($"Il y a {actors.Count():n0} acteurs");
+var actors = movies
+    .SelectMany(m => m.Actors)
+    .ToList();
+Console.WriteLine($"Il y a {actors.Count:n0} acteurs");
 Console.WriteLine($"Il y a {actors.Distinct().Count():n0} acteurs différents");
 Console.WriteLine();
 
-var directors = movies.SelectMany(m => m.Directors);
-Console.WriteLine($"Il y a {directors.Count():n0} réalisateurs");
+var directors = movies
+    .SelectMany(m => m.Directors)
+    .ToList();
+Console.WriteLine($"Il y a {directors.Count:n0} réalisateurs");
 Console.WriteLine($"Il y a {directors.Distinct().Count():n0} réalisateurs différents");
+
+return;
 
 static IEnumerable<MovieType> GetMovies(string connectionString)
 {
@@ -45,7 +50,7 @@ static IEnumerable<MovieType> GetMovies(string connectionString)
 
     while (reader.Read())
     {
-        int offset = 0;
+        var offset = 0;
         var title = Title.Create(reader.GetString(offset++));
         if (title is null) continue;
 
@@ -98,7 +103,6 @@ static IEnumerable<MovieType> GetMovies(string connectionString)
 
         names = GetNames(reader, offset, 1);
         names.ForEach(music => movie = AddUniqueMusic(movie, music));
-        offset++;
 
         yield return movie;
     }
@@ -106,7 +110,7 @@ static IEnumerable<MovieType> GetMovies(string connectionString)
 
 static IEnumerable<NameType> GetNames(DbDataReader reader, int offset, int maxCount)
 {
-    for (int i = 0; i < maxCount; i++)
+    for (var i = 0; i < maxCount; i++)
     {
         var name = Name.Create(reader.GetNullableString(offset++));
         if (name is null) yield break;
