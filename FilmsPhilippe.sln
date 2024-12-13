@@ -22,6 +22,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MsAccessToSQLite", "MsAccessToSQLite\MsAccessToSQLite.csproj", "{74E2C036-6D37-4313-A02C-CBC1718036DB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Movies.Domain", "Movies.Domain\Movies.Domain.csproj", "{799D2C29-9678-4FF4-8112-FDC7D9795E68}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,6 +58,10 @@ Global
 		{74E2C036-6D37-4313-A02C-CBC1718036DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74E2C036-6D37-4313-A02C-CBC1718036DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74E2C036-6D37-4313-A02C-CBC1718036DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{799D2C29-9678-4FF4-8112-FDC7D9795E68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{799D2C29-9678-4FF4-8112-FDC7D9795E68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{799D2C29-9678-4FF4-8112-FDC7D9795E68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{799D2C29-9678-4FF4-8112-FDC7D9795E68}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
