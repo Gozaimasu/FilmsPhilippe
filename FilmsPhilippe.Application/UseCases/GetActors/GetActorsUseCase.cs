@@ -5,7 +5,7 @@ namespace FilmsPhilippe.Application.UseCases.GetActors;
 internal class GetActorsUseCase : IGetActorsUseCase
 {
 	private readonly IActorRepository _actorRepository;
-	private IGetActorsOutputPort _outputPort;
+	private IGetActorsOutputPort? _outputPort;
 
 	public GetActorsUseCase(IActorRepository actorRepository)
 	{
