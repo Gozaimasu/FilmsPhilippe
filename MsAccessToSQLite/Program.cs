@@ -1,27 +1,39 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using MsAccessToSQLite;
 using System.Data.Odbc;
 
-var optionsBuilder = new DbContextOptionsBuilder<MoviesDbContext>();
-optionsBuilder.UseSqlite(@"DataSource=D:\.net\FilmsPhilippe\Databases\movies.db");
+HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
 
-var context = new MoviesDbContext(optionsBuilder.Options);
+builder.Services.AddDbContext<MoviesDbContext>((sp, b) =>
+{
+    var configuration = sp.GetRequiredService<IConfiguration>();
+    var sqLiteConnectionString = configuration.GetConnectionString("SQLite");
+    b.UseSqlite(sqLiteConnectionString);
+});
+
+using IHost host = builder.Build();
+
+using var scope = host.Services.CreateScope();
+var serviceProvider = scope.ServiceProvider;
+using var context = serviceProvider.GetRequiredService<MoviesDbContext>();
 context.Database.EnsureCreated();
 
 Console.WriteLine("Database created");
 
-const string connectionString =
-    @"Driver={Microsoft Access Driver (*.mdb, *.accdb)}; Dbq=D:\.net\FilmsPhilippe\Databases\newfilms.accdb; Uid = Admin; Pwd =; ";
-
-OdbcCommand command = new("SELECT TITRE, TITRE_OR, ANNEE, ORIGINE, MINUTAGE, VISION, QUI, REALISAT_1, REALISAT_2, SCENARIO, SCENARIO1, D_APRES, " +
+using OdbcCommand command = new("SELECT TITRE, TITRE_OR, ANNEE, ORIGINE, MINUTAGE, VISION, QUI, REALISAT_1, REALISAT_2, SCENARIO, SCENARIO1, D_APRES, " +
 "DIALOGUE, PHOTO, MONTAGE, MUSIQUE, ASS_REAL_1, ASS_REAL_2, ASS_REAL_3, ACTEUR_1, ACTEUR_2, ACTEUR_3, ACTEUR_4, ACTEUR_5, ACTEUR_6, ACTEUR_7, " +
 "ACTEUR_8, ACTEUR_9, ACTEUR_10, ACTEUR_11, ACTEUR_12, ACTEUR_13, ACTEUR_14, ACTEUR_15, ACTEUR_16, OU, RESUMAID, COMPLET, verificationcd, dervision FROM FILM");
 
-using OdbcConnection connection = new(connectionString);
+var configuration = serviceProvider.GetRequiredService<IConfiguration>();
+var msAccessConnectionString = configuration.GetConnectionString("MSAccess");
+using OdbcConnection connection = new(msAccessConnectionString);
 command.Connection = connection;
 connection.Open();
 
-var reader = command.ExecuteReader();
+using var reader = command.ExecuteReader();
 
 int count = 0;
 while (reader.Read())
