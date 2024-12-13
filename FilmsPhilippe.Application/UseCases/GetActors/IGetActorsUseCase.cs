@@ -2,6 +2,6 @@
 
 public interface IGetActorsUseCase
 {
-	Task ExecuteAsync(string? searchString, CancellationToken token = default);
-	void SetOutputPort(IGetActorsOutputPort outputPort);
+    Task ExecuteAsync(string? searchString, CancellationToken token = default);
+    void SetOutputPort(IGetActorsOutputPort outputPort);
 }
