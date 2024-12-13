@@ -4,5 +4,5 @@ namespace FilmsPhilippe.Application.Repositories;
 
 public interface IActorRepository
 {
-	IEnumerable<Actor> List();
+    IEnumerable<Actor> List();
 }

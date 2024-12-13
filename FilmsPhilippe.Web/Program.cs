@@ -1,3 +1,6 @@
+using FilmsPhilippe.Application.Extensions;
+using FilmsPhilippe.Infrastructure.MSAccess.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

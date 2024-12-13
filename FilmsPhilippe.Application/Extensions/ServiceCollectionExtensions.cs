@@ -1,7 +1,8 @@
 ﻿using FilmsPhilippe.Application.UseCases.GetActors;
 using FilmsPhilippe.Application.UseCases.GetMovies;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace Microsoft.Extensions.DependencyInjection;
+namespace FilmsPhilippe.Application.Extensions;
 
 public static class ServiceCollectionExtensions
 {

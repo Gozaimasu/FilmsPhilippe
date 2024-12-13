@@ -4,5 +4,5 @@ namespace FilmsPhilippe.Application.UseCases.GetActors;
 
 public interface IGetActorsOutputPort
 {
-	void Ok(IEnumerable<Actor> movie);
+    void Ok(IEnumerable<Actor> movie);
 }
