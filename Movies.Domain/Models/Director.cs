@@ -8,7 +8,7 @@ public class Director
     /// <summary>
     /// Identifiant du réalisateur
     /// </summary>
-    public Guid Id { get; set; }
+    public int Id { get; set; }
     /// <summary>
     /// Nom du réalisateur
     /// </summary>

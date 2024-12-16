@@ -8,7 +8,7 @@ public class Actor
     /// <summary>
     /// Identifiant de l'acteur
     /// </summary>
-    public Guid Id { get; set; }
+    public int Id { get; set; }
     /// <summary>
     /// Nom de l'acteur
     /// </summary>

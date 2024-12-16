@@ -15,7 +15,7 @@ internal sealed class MovieRepository : IMovieRepository
         _context.Database.EnsureCreated();
     }
 
-    public async Task<Guid> AddAsync(Movie movie, CancellationToken token = default)
+    public async Task<int> AddAsync(Movie movie, CancellationToken token = default)
     {
         var entry = await _context.AddAsync(movie, token);
         await _context.SaveChangesAsync(token);
@@ -28,12 +28,12 @@ internal sealed class MovieRepository : IMovieRepository
         await  _context.SaveChangesAsync(token);
     }
 
-    public async Task DeleteAsync(Guid id, CancellationToken token = default) =>
-        await _context.Movies.Where(m => m.Id.Equals(id)).ExecuteDeleteAsync(token);
+    public async Task DeleteAsync(int id, CancellationToken token = default) =>
+        await _context.Movies.Where(m => m.Id == id).ExecuteDeleteAsync(token);
 
     public async Task<IEnumerable<Movie>> GetAllAsync(CancellationToken token = default) =>
         await _context.Movies.Take(100).ToListAsync(token);
 
-    public async Task<Movie?> GetAsync(Guid id, CancellationToken token = default) =>
+    public async Task<Movie?> GetAsync(int id, CancellationToken token = default) =>
         await _context.Movies.FindAsync([id], token);
 }

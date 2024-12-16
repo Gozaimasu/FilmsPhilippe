@@ -8,7 +8,7 @@ public class Movie
     /// <summary>
     /// Identifiant d'un film
     /// </summary>
-    public Guid Id { get; set; } = Guid.Empty;
+    public int Id { get; set; }
     /// <summary>
     /// Titre du film
     /// </summary>
