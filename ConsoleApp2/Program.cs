@@ -2,6 +2,9 @@
 using ConsoleApp2.Models;
 using System.Data.Common;
 using System.Data.Odbc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using static ConsoleApp2.Processes.AddActorDefaults;
 using static ConsoleApp2.Processes.AddAssistantDirectorDefaults;
 using static ConsoleApp2.Processes.AddDialogWriterDefaults;
@@ -12,9 +15,22 @@ using static ConsoleApp2.Processes.AddOriginalWriterDefaults;
 using static ConsoleApp2.Processes.AddPhotographerDefaults;
 using static ConsoleApp2.Processes.AddScriptwriterDefaults;
 
-const string connectionString = @"Driver={Microsoft Access Driver (*.mdb, *.accdb)}; Dbq=D:\.net\FilmsPhilippe\Databases\newfilms.accdb; Uid = Admin; Pwd =; ";
+// Création du builder
+var builder = Host.CreateApplicationBuilder(args);
 
-var movies = GetMovies(connectionString).ToList();
+// Création du host
+using var host = builder.Build();
+
+// Création d'un scope et récupération du service provider
+using var scope = host.Services.CreateScope();
+var serviceProvider = scope.ServiceProvider;
+
+var configuration = serviceProvider.GetRequiredService<IConfiguration>();
+var msAccessConnectionString = configuration.GetConnectionString("MSAccess");
+if (string.IsNullOrEmpty(msAccessConnectionString))
+    throw new ApplicationException("MSAccess connection string is missing.");
+
+var movies = GetMovies(msAccessConnectionString).ToList();
 
 Console.WriteLine($"Il y a {movies.Count:n0} films");
 Console.WriteLine();
