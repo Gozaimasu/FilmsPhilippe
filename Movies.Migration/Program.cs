@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Movies.Domain;
+using Movies.Domain.Repositories;
 using Movies.Infrastructure.SQLite.Extensions;
 
 HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);

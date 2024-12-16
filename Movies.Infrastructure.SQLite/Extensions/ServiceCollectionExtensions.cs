@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Movies.Domain;
+using Movies.Domain.Repositories;
 using Movies.Infrastructure.SQLite.Context;
 using Movies.Infrastructure.SQLite.Repositories;
 

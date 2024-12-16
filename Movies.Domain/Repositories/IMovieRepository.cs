@@ -1,4 +1,6 @@
-﻿namespace Movies.Domain;
+﻿using Movies.Domain.Models;
+
+namespace Movies.Domain.Repositories;
 
 public interface IMovieRepository
 {

@@ -4,11 +4,11 @@ using Movies.Domain.Models;
 
 namespace Movies.Infrastructure.SQLite.Configurations;
 
-internal sealed class MovieConfiguration : IEntityTypeConfiguration<Movie>
+internal sealed class ActorConfiguration : IEntityTypeConfiguration<Actor>
 {
-    public void Configure(EntityTypeBuilder<Movie> builder)
+    public void Configure(EntityTypeBuilder<Actor> builder)
     {
-        builder.ToTable("Movies");
+        builder.ToTable("Actors");
 
         builder
             .HasKey(x => x.Id);
@@ -16,5 +16,9 @@ internal sealed class MovieConfiguration : IEntityTypeConfiguration<Movie>
         builder
             .Property(m => m.Id)
             .ValueGeneratedOnAdd();
+
+        builder
+            .HasMany(a => a.Movies)
+            .WithMany(m => m.Actors);
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Movies.Domain;
+﻿namespace Movies.Domain.Models;
 
 /// <summary>
 /// Film
@@ -86,70 +86,6 @@ public class Movie
     /// </summary>
     public string? AssistantRealisateur3 { get; set; }
     /// <summary>
-    /// Acteur 1
-    /// </summary>
-    public string? Acteur1 { get; set; }
-    /// <summary>
-    /// Acteur 2
-    /// </summary>
-    public string? Acteur2 { get; set; }
-    /// <summary>
-    /// Acteur 3
-    /// </summary>
-    public string? Acteur3 { get; set; }
-    /// <summary>
-    /// Acteur 4
-    /// </summary>
-    public string? Acteur4 { get; set; }
-    /// <summary>
-    /// Acteur 5
-    /// </summary>
-    public string? Acteur5 { get; set; }
-    /// <summary>
-    /// Acteur 6
-    /// </summary>
-    public string? Acteur6 { get; set; }
-    /// <summary>
-    /// Acteur 7
-    /// </summary>
-    public string? Acteur7 { get; set; }
-    /// <summary>
-    /// Acteur 8
-    /// </summary>
-    public string? Acteur8 { get; set; }
-    /// <summary>
-    /// Acteur 9
-    /// </summary>
-    public string? Acteur9 { get; set; }
-    /// <summary>
-    /// Acteur 10
-    /// </summary>
-    public string? Acteur10 { get; set; }
-    /// <summary>
-    /// Acteur 11
-    /// </summary>
-    public string? Acteur11 { get; set; }
-    /// <summary>
-    /// Acteur 12
-    /// </summary>
-    public string? Acteur12 { get; set; }
-    /// <summary>
-    /// Acteur 13
-    /// </summary>
-    public string? Acteur13 { get; set; }
-    /// <summary>
-    /// Acteur 14
-    /// </summary>
-    public string? Acteur14 { get; set; }
-    /// <summary>
-    /// Acteur 15
-    /// </summary>
-    public string? Acteur15 { get; set; }
-    /// <summary>
-    /// Acteur 16
-    /// </summary>
-    public string? Acteur16 { get; set; }
-    /// <summary>
     /// ???
     /// </summary>
     public string? Ou { get; set; }
@@ -169,4 +105,6 @@ public class Movie
     /// 
     /// </summary>
     public string Dervision { get; set; } = string.Empty;
+
+    public List<Actor> Actors { get; set; } = [];
 }

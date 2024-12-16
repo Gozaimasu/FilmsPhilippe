@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Movies.Domain;
+using Movies.Domain.Models;
+using Movies.Domain.Repositories;
 using Movies.Infrastructure.SQLite.Context;
 
 namespace Movies.Infrastructure.SQLite.Repositories;
@@ -8,8 +9,11 @@ internal sealed class MovieRepository : IMovieRepository
 {
     private readonly MoviesDbContext _context;
 
-    public MovieRepository(MoviesDbContext context) =>
+    public MovieRepository(MoviesDbContext context)
+    {
         _context = context;
+        _context.Database.EnsureCreated();
+    }
 
     public async Task<Guid> AddAsync(Movie movie, CancellationToken token = default)
     {
