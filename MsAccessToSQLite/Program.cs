@@ -57,8 +57,6 @@ using (OdbcConnection connection = new(msAccessConnectionString))
                     Minutage = reader.GetInt32(4),
                     Vision = reader.GetInt32(5),
                     Qui = reader.GetString(6),
-                    Realisateur1 = reader.GetValue(7) as string,
-                    Realisateur2 = reader.GetValue(8) as string,
                     Scenario = reader.GetValue(9) as string,
                     Scenario1 = reader.GetValue(10) as string, // 10
                     DApres = reader.GetValue(11) as string,
@@ -75,6 +73,13 @@ using (OdbcConnection connection = new(msAccessConnectionString))
                     VerificationCD = reader.GetInt32(38),
                     Dervision = reader.GetString(39)
                 };
+
+                offset = 7;
+                do
+                {
+                    if (reader.GetValue(offset++) is not string directorName) break;
+                    movie.Directors.Add(new Director() { Name = directorName });
+                } while (offset < 9);
 
                 offset = 19;
                 do

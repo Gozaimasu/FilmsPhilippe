@@ -1,21 +1,21 @@
 ﻿namespace Movies.Domain.Models;
 
 /// <summary>
-/// Acteur
+/// Réalisateur
 /// </summary>
-public class Actor
+public class Director
 {
     /// <summary>
-    /// Identifiant de l'acteur
+    /// Identifiant du réalisateur
     /// </summary>
     public Guid Id { get; set; }
     /// <summary>
-    /// Nom de l'acteur
+    /// Nom du réalisateur
     /// </summary>
     public string Name { get; set; } = string.Empty;
 
     /// <summary>
-    /// Liste des films de l'acteur
+    /// Liste des films du réalisateur
     /// </summary>
     public List<Movie> Movies { get; set; } = [];
 }

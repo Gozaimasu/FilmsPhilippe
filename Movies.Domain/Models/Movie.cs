@@ -38,14 +38,6 @@ public class Movie
     /// </summary>
     public string Qui { get; set; } = string.Empty;
     /// <summary>
-    /// Identité du réalisateur
-    /// </summary>
-    public string? Realisateur1 { get; set; }
-    /// <summary>
-    /// Identité du second réalisateur
-    /// </summary>
-    public string? Realisateur2 { get; set; }
-    /// <summary>
     /// Identité du scénariste
     /// </summary>
     public string? Scenario { get; set; }
@@ -106,5 +98,12 @@ public class Movie
     /// </summary>
     public string Dervision { get; set; } = string.Empty;
 
+    /// <summary>
+    /// Liste des acteurs du film
+    /// </summary>
     public List<Actor> Actors { get; set; } = [];
+    /// <summary>
+    /// Liste des réalisateurs du film
+    /// </summary>
+    public List<Director> Directors { get; set; } = [];
 }

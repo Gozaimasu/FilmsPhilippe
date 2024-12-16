@@ -11,7 +11,7 @@ internal sealed class MovieConfiguration : IEntityTypeConfiguration<Movie>
         builder.ToTable("Movies");
 
         builder
-            .HasKey(x => x.Id);
+            .HasKey(m => m.Id);
 
         builder
             .Property(m => m.Id)

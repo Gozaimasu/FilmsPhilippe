@@ -11,10 +11,10 @@ internal sealed class ActorConfiguration : IEntityTypeConfiguration<Actor>
         builder.ToTable("Actors");
 
         builder
-            .HasKey(x => x.Id);
+            .HasKey(a => a.Id);
 
         builder
-            .Property(m => m.Id)
+            .Property(a => a.Id)
             .ValueGeneratedOnAdd();
 
         builder
