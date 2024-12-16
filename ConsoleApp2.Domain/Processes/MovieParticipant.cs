@@ -1,6 +1,6 @@
 ﻿using ConsoleApp2.Domain.Models;
 
-namespace ConsoleApp2.Processes;
+namespace ConsoleApp2.Domain.Processes;
 
 public delegate MovieType AddParticipant(MovieType movie, NameType participant);
 

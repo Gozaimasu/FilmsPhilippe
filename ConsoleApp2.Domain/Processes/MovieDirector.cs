@@ -1,4 +1,4 @@
-﻿namespace ConsoleApp2.Processes;
+﻿namespace ConsoleApp2.Domain.Processes;
 
 public static class AddDirectorDefaults
 {

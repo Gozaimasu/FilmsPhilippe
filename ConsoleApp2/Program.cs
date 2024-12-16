@@ -5,15 +5,15 @@ using ConsoleApp2.Domain.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using static ConsoleApp2.Processes.AddActorDefaults;
-using static ConsoleApp2.Processes.AddAssistantDirectorDefaults;
-using static ConsoleApp2.Processes.AddDialogWriterDefaults;
-using static ConsoleApp2.Processes.AddDirectorDefaults;
-using static ConsoleApp2.Processes.AddEditingDefaults;
-using static ConsoleApp2.Processes.AddMusicDefaults;
-using static ConsoleApp2.Processes.AddOriginalWriterDefaults;
-using static ConsoleApp2.Processes.AddPhotographerDefaults;
-using static ConsoleApp2.Processes.AddScriptwriterDefaults;
+using static ConsoleApp2.Domain.Processes.AddActorDefaults;
+using static ConsoleApp2.Domain.Processes.AddAssistantDirectorDefaults;
+using static ConsoleApp2.Domain.Processes.AddDialogWriterDefaults;
+using static ConsoleApp2.Domain.Processes.AddDirectorDefaults;
+using static ConsoleApp2.Domain.Processes.AddEditingDefaults;
+using static ConsoleApp2.Domain.Processes.AddMusicDefaults;
+using static ConsoleApp2.Domain.Processes.AddOriginalWriterDefaults;
+using static ConsoleApp2.Domain.Processes.AddPhotographerDefaults;
+using static ConsoleApp2.Domain.Processes.AddScriptwriterDefaults;
 
 // Création du builder
 var builder = Host.CreateApplicationBuilder(args);
