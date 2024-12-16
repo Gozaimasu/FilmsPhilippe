@@ -22,6 +22,12 @@ internal sealed class MovieRepository : IMovieRepository
         return entry.Entity.Id;
     }
 
+    public async Task AddRangeAsync(IEnumerable<Movie> movies, CancellationToken token = default)
+    {
+        await _context.Movies.AddRangeAsync(movies, token);
+        await  _context.SaveChangesAsync(token);
+    }
+
     public async Task DeleteAsync(Guid id, CancellationToken token = default) =>
         await _context.Movies.Where(m => m.Id.Equals(id)).ExecuteDeleteAsync(token);
 
