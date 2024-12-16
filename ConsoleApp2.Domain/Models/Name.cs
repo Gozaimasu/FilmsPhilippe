@@ -1,4 +1,4 @@
-﻿namespace ConsoleApp2.Models;
+﻿namespace ConsoleApp2.Domain.Models;
 
 public abstract record NameType;
 

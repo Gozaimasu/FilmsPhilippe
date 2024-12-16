@@ -1,5 +1,5 @@
 ﻿
-namespace ConsoleApp2.Models;
+namespace ConsoleApp2.Domain.Models;
 
 public record MovieType(TitleType Title, YearType Year, CountryType Origin, TimeSpan Duration, NameType[] Directors, NameType[] Actors)
 {

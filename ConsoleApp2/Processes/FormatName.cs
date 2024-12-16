@@ -1,4 +1,4 @@
-﻿using ConsoleApp2.Models;
+﻿using ConsoleApp2.Domain.Models;
 
 namespace ConsoleApp2.Processes;
 

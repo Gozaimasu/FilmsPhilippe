@@ -1,7 +1,7 @@
 ﻿using ConsoleApp2;
-using ConsoleApp2.Models;
 using System.Data.Common;
 using System.Data.Odbc;
+using ConsoleApp2.Domain.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;

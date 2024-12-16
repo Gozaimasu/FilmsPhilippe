@@ -28,6 +28,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Movies.Infrastructure.SQLit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Movies.Migration", "Movies.Migration\Movies.Migration.csproj", "{06C6BF2A-3B61-4AFE-AE1C-1A5F05193103}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp2.Domain", "ConsoleApp2.Domain\ConsoleApp2.Domain.csproj", "{10A5F056-8DD4-4C17-A53B-B48AF4B51139}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -74,6 +76,10 @@ Global
 		{06C6BF2A-3B61-4AFE-AE1C-1A5F05193103}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06C6BF2A-3B61-4AFE-AE1C-1A5F05193103}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06C6BF2A-3B61-4AFE-AE1C-1A5F05193103}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10A5F056-8DD4-4C17-A53B-B48AF4B51139}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10A5F056-8DD4-4C17-A53B-B48AF4B51139}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10A5F056-8DD4-4C17-A53B-B48AF4B51139}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10A5F056-8DD4-4C17-A53B-B48AF4B51139}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
