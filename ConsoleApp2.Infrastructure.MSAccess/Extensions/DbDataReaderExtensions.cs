@@ -1,6 +1,6 @@
 ﻿using System.Data.Common;
 
-namespace ConsoleApp2;
+namespace ConsoleApp2.Infrastructure.MSAccess.Extensions;
 
 public static class DbDataReaderExtensions
 {
