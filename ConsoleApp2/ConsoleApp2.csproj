@@ -30,6 +30,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\ConsoleApp2.Infrastructure.MSAccess\ConsoleApp2.Infrastructure.MSAccess.csproj" />
+	  <ProjectReference Include="..\ConsoleApp2.Infrastructure.SQLite\ConsoleApp2.Infrastructure.SQLite.csproj" />
 	</ItemGroup>
 
 </Project>
