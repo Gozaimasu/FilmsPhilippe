@@ -14,7 +14,7 @@ public static class FormatMovieExtensions
 public static class FormatMovieDefaults
 {
     public static FormatMovieExt NamesThenTitle => (namesFormatter, movie) =>
-        $"{namesFormatter(movie.Directors)}, {movie.Title.Value}";
+        $"{namesFormatter(movie.Directors.Select(d => d.Name))}, {movie.Title.Value}";
     public static FormatMovieExt TitleThenNames => (namesFormatter, movie) =>
-        $"{movie.Title.Value} by {namesFormatter(movie.Directors)} with {namesFormatter(movie.Actors)}";
+        $"{movie.Title.Value} by {namesFormatter(movie.Directors.Select(d => d.Name))} with {namesFormatter(movie.Actors.Select(a => a.Name))}";
 }

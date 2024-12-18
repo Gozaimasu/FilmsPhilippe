@@ -4,8 +4,8 @@ namespace ConsoleApp2.Domain.Processes;
 
 public delegate string FormatName(NameType name);
 
-public delegate string FormatNamesList(NameType[] names);
-public delegate string FormatNameListExt(FormatName format, NameType[] names);
+public delegate string FormatNamesList(IEnumerable<NameType> names);
+public delegate string FormatNameListExt(FormatName format, IEnumerable<NameType> names);
 
 public static class FormatNameDefaults
 {

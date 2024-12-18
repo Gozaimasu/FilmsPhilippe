@@ -2,11 +2,11 @@
 
 namespace ConsoleApp2.Domain.Processes;
 
-public delegate MovieType AddOriginalWriter(MovieType movie, NameType originalWriter);
+public delegate MovieType AddOriginalWriter(MovieType movie, PersonType originalWriter);
 
 public static class AddOriginalWriterExtensions
 {
-    public static Func<NameType, MovieType> Apply(this AddOriginalWriter strategy, MovieType movie) =>
+    public static Func<PersonType, MovieType> Apply(this AddOriginalWriter strategy, MovieType movie) =>
         originalWriter => strategy(movie, originalWriter);
 }
 

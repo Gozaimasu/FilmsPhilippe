@@ -81,39 +81,75 @@ internal sealed class MovieRepository : IMovieRepository
             if (originalTitle is not null) movie = movie with { OriginalTitle = originalTitle };
 
             var names = GetNames(reader, offset, nbDirectors);
-            names.ForEach(director => movie = AddUniqueDirector(movie, director));
+            names.ForEach(name =>
+            {
+                var director = Person.Create(name);
+                movie = AddUniqueDirector(movie, director);
+            });
             offset += nbDirectors;
 
             names = GetNames(reader, offset, nbActors);
-            names.ForEach(actor => movie = AddUniqueActor(movie, actor));
+            names.ForEach(name =>
+            {
+                var actor = Person.Create(name);
+                movie = AddUniqueActor(movie, actor);
+            });
             offset += nbActors;
 
             names = GetNames(reader, offset, nbScriptwriters);
-            names.ForEach(scriptwriter => movie = AddUniqueScriptwriter(movie, scriptwriter));
+            names.ForEach(name =>
+            {
+                var scriptwriter = Person.Create(name);
+                movie = AddUniqueScriptwriter(movie, scriptwriter);
+            });
             offset += nbScriptwriters;
 
             names = GetNames(reader, offset, nbAssistantDirectors);
-            names.ForEach(assistantDirector => movie = AddUniqueAssistantDirector(movie, assistantDirector));
+            names.ForEach(name =>
+            {
+                var assistantDirector = Person.Create(name);
+                movie = AddUniqueAssistantDirector(movie, assistantDirector);
+            });
             offset += nbAssistantDirectors;
 
             names = GetNames(reader, offset, 1);
-            names.ForEach(basedOn => movie = AddUniqueOriginalWriter(movie, basedOn));
+            names.ForEach(name =>
+            {
+                var basedOn = Person.Create(name);
+                movie = AddUniqueOriginalWriter(movie, basedOn);
+            });
             offset++;
 
             names = GetNames(reader, offset, 1);
-            names.ForEach(dialogWriter => movie = AddUniqueDialogWriter(movie, dialogWriter));
+            names.ForEach(name =>
+            {
+                var dialogWriter = Person.Create(name);
+                movie = AddUniqueDialogWriter(movie, dialogWriter);
+            });
             offset++;
 
             names = GetNames(reader, offset, 1);
-            names.ForEach(photographer => movie = AddUniquePhotographer(movie, photographer));
+            names.ForEach(name =>
+            {
+                var photographer = Person.Create(name);
+                movie = AddUniquePhotographer(movie, photographer);
+            });
             offset++;
 
             names = GetNames(reader, offset, 1);
-            names.ForEach(editing => movie = AddUniqueEditing(movie, editing));
+            names.ForEach(name =>
+            {
+                var editing = Person.Create(name);
+                movie = AddUniqueEditing(movie, editing);
+            });
             offset++;
 
             names = GetNames(reader, offset, 1);
-            names.ForEach(music => movie = AddUniqueMusic(movie, music));
+            names.ForEach(name =>
+            {
+                var music = Person.Create(name);
+                movie = AddUniqueMusic(movie, music);
+            });
 
             yield return movie;
         }

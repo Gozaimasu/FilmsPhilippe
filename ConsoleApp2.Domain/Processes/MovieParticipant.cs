@@ -2,10 +2,10 @@
 
 namespace ConsoleApp2.Domain.Processes;
 
-public delegate MovieType AddParticipant(MovieType movie, NameType participant);
+public delegate MovieType AddParticipant(MovieType movie, PersonType participant);
 
 public static class AddParticipantExtensions
 {
-    public static Func<NameType, MovieType> Apply(this AddParticipant strategy, MovieType movie) =>
+    public static Func<PersonType, MovieType> Apply(this AddParticipant strategy, MovieType movie) =>
         participant => strategy(movie, participant);
 }
