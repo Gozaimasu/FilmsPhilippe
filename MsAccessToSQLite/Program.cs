@@ -1,107 +1,114 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MsAccessToSQLite;
+using Movies.Domain.Models;
+using Movies.Domain.Repositories;
+using Movies.Infrastructure.SQLite.Extensions;
 using System.Data.Odbc;
+using System.Diagnostics;
 
-HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
+var builder = Host.CreateApplicationBuilder(args);
 
-builder.Services.AddDbContext<MoviesDbContext>((sp, b) =>
-{
-    var configuration = sp.GetRequiredService<IConfiguration>();
-    var sqLiteConnectionString = configuration.GetConnectionString("SQLite");
-    b.UseSqlite(sqLiteConnectionString);
-});
+builder.Services.AddSQLite();
 
-using IHost host = builder.Build();
+using var host = builder.Build();
 
 using var scope = host.Services.CreateScope();
 var serviceProvider = scope.ServiceProvider;
-using var context = serviceProvider.GetRequiredService<MoviesDbContext>();
-context.Database.EnsureCreated();
 
-Console.WriteLine("Database created");
-
-using OdbcCommand command = new("SELECT TITRE, TITRE_OR, ANNEE, ORIGINE, MINUTAGE, VISION, QUI, REALISAT_1, REALISAT_2, SCENARIO, SCENARIO1, D_APRES, " +
-"DIALOGUE, PHOTO, MONTAGE, MUSIQUE, ASS_REAL_1, ASS_REAL_2, ASS_REAL_3, ACTEUR_1, ACTEUR_2, ACTEUR_3, ACTEUR_4, ACTEUR_5, ACTEUR_6, ACTEUR_7, " +
-"ACTEUR_8, ACTEUR_9, ACTEUR_10, ACTEUR_11, ACTEUR_12, ACTEUR_13, ACTEUR_14, ACTEUR_15, ACTEUR_16, OU, RESUMAID, COMPLET, verificationcd, dervision FROM FILM");
+var movies = new List<Movie>();
+int total;
 
 var configuration = serviceProvider.GetRequiredService<IConfiguration>();
 var msAccessConnectionString = configuration.GetConnectionString("MSAccess");
-using OdbcConnection connection = new(msAccessConnectionString);
-command.Connection = connection;
-connection.Open();
-
-using var reader = command.ExecuteReader();
-
-int count = 0;
-while (reader.Read())
+using (OdbcConnection connection = new(msAccessConnectionString))
 {
-    int offset = 0;
-    var title = reader.GetString(offset++);
-    if (title is null) continue;
-    try
+    connection.Open();
+
+    using (OdbcCommand command = new("SELECT COUNT(*) FROM FILM"))
     {
-        var movie = new Movie
-        {
-            Titre = title,
-            TitreOriginal = reader.GetValue(offset++) as string,
-            Annee = reader.GetInt32(offset++),
-            Origine = reader.GetString(offset++),
-            Minutage = reader.GetInt32(offset++),
-            Vision = reader.GetInt32(offset++),
-            Qui = reader.GetString(offset++),
-            Realisateur1 = reader.GetValue(offset++) as string,
-            Realisateur2 = reader.GetValue(offset++) as string,
-            Scenario = reader.GetValue(offset++) as string,
-            Scenario1 = reader.GetValue(offset++) as string, // 10
-            DApres = reader.GetValue(offset++) as string,
-            Dialogue = reader.GetValue(offset++) as string,
-            Photo = reader.GetValue(offset++) as string,
-            Montage = reader.GetValue(offset++) as string,
-            Musique = reader.GetValue(offset++) as string,
-            AssistantRealisateur1 = reader.GetValue(offset++) as string,
-            AssistantRealisateur2 = reader.GetValue(offset++) as string,
-            AssistantRealisateur3 = reader.GetValue(offset++) as string,
-            Acteur1 = reader.GetValue(offset++) as string,
-            Acteur2 = reader.GetValue(offset++) as string, // 20
-            Acteur3 = reader.GetValue(offset++) as string,
-            Acteur4 = reader.GetValue(offset++) as string,
-            Acteur5 = reader.GetValue(offset++) as string,
-            Acteur6 = reader.GetValue(offset++) as string,
-            Acteur7 = reader.GetValue(offset++) as string,
-            Acteur8 = reader.GetValue(offset++) as string,
-            Acteur9 = reader.GetValue(offset++) as string,
-            Acteur10 = reader.GetValue(offset++) as string,
-            Acteur11 = reader.GetValue(offset++) as string,
-            Acteur12 = reader.GetValue(offset++) as string, // 30
-            Acteur13 = reader.GetValue(offset++) as string,
-            Acteur14 = reader.GetValue(offset++) as string,
-            Acteur15 = reader.GetValue(offset++) as string,
-            Acteur16 = reader.GetValue(offset++) as string,
-            Ou = reader.GetValue(offset++) as string,
-            Resume = reader.GetString(offset++),
-            Complet = reader.GetInt32(offset++),
-            VerificationCD = reader.GetInt32(offset++),
-            Dervision = reader.GetString(offset++)
-        };
-
-        context.Movies.Add(movie);
-        context.SaveChanges();
-
-        count++;
-        if(count % 100 == 0)
-        {
-            Console.WriteLine($"{count} films");
-        }
+        command.Connection = connection;
+        using var reader = command.ExecuteReader();
+        reader.Read();
+        total = reader.GetInt32(0);
     }
-    catch
+
+    using (OdbcCommand command = new("SELECT TITRE, TITRE_OR, ANNEE, ORIGINE, MINUTAGE, VISION, QUI, REALISAT_1, REALISAT_2, SCENARIO, SCENARIO1, D_APRES, " +
+    "DIALOGUE, PHOTO, MONTAGE, MUSIQUE, ASS_REAL_1, ASS_REAL_2, ASS_REAL_3, ACTEUR_1, ACTEUR_2, ACTEUR_3, ACTEUR_4, ACTEUR_5, ACTEUR_6, ACTEUR_7, " +
+    "ACTEUR_8, ACTEUR_9, ACTEUR_10, ACTEUR_11, ACTEUR_12, ACTEUR_13, ACTEUR_14, ACTEUR_15, ACTEUR_16, OU, RESUMAID, COMPLET, verificationcd, dervision FROM FILM"))
     {
-        Console.WriteLine($"{title}, offset = {offset}");
-        throw;
+        command.Connection = connection;
+
+        using var reader = command.ExecuteReader();
+
+        var count = 0;
+        while (reader.Read())
+        {
+            var offset = 0;
+            var title = reader.GetString(0);
+            try
+            {
+                var movie = new Movie
+                {
+                    Titre = title,
+                    TitreOriginal = reader.GetValue(1) as string,
+                    Annee = reader.GetInt32(2),
+                    Origine = reader.GetString(3),
+                    Minutage = reader.GetInt32(4),
+                    Vision = reader.GetInt32(5),
+                    Qui = reader.GetString(6),
+                    Scenario = reader.GetValue(9) as string,
+                    Scenario1 = reader.GetValue(10) as string, // 10
+                    DApres = reader.GetValue(11) as string,
+                    Dialogue = reader.GetValue(12) as string,
+                    Photo = reader.GetValue(13) as string,
+                    Montage = reader.GetValue(14) as string,
+                    Musique = reader.GetValue(15) as string,
+                    AssistantRealisateur1 = reader.GetValue(16) as string,
+                    AssistantRealisateur2 = reader.GetValue(17) as string,
+                    AssistantRealisateur3 = reader.GetValue(18) as string,
+                    Ou = reader.GetValue(35) as string,
+                    Resume = reader.GetString(36),
+                    Complet = reader.GetInt32(37),
+                    VerificationCD = reader.GetInt32(38),
+                    Dervision = reader.GetString(39)
+                };
+
+                offset = 7;
+                do
+                {
+                    if (reader.GetValue(offset++) is not string directorName) break;
+                    movie.Directors.Add(new Director() { Name = directorName });
+                } while (offset < 9);
+
+                offset = 19;
+                do
+                {
+                    if (reader.GetValue(offset++) is not string actorName) break;
+                    movie.Actors.Add(new Actor() { Name = actorName });
+                } while (offset < 35);
+
+                movies.Add(movie);
+
+                count++;
+                if (count % 100 == 0)
+                {
+                    Console.WriteLine($"{count} films / {total}");
+                }
+            }
+            catch
+            {
+                Console.WriteLine($"{title}, offset = {offset}");
+                throw;
+            }
+        }
     }
 }
 
-count = context.Movies.Count();
-Console.WriteLine($"Total count: {count}");
+var movieRepository = serviceProvider.GetRequiredService<IMovieRepository>();
+var start = Stopwatch.GetTimestamp();
+Console.WriteLine("Ajout des films");
+movieRepository.AddRangeAsync(movies).Wait();
+var elapsed = Stopwatch.GetElapsedTime(start);
+
+Console.WriteLine($"{total} movies added in {elapsed}");

@@ -30,4 +30,8 @@
 		<PackageReference Include="System.Data.Odbc" Version="9.0.0" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\Movies.Infrastructure.SQLite\Movies.Infrastructure.SQLite.csproj" />
+	</ItemGroup>
+
 </Project>

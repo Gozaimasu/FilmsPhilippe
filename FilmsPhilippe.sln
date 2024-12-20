@@ -22,6 +22,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MsAccessToSQLite", "MsAccessToSQLite\MsAccessToSQLite.csproj", "{74E2C036-6D37-4313-A02C-CBC1718036DB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Movies.Domain", "Movies.Domain\Movies.Domain.csproj", "{799D2C29-9678-4FF4-8112-FDC7D9795E68}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Movies.Infrastructure.SQLite", "Movies.Infrastructure.SQLite\Movies.Infrastructure.SQLite.csproj", "{9280C9B2-6C1E-4562-9107-3D5E10AA2798}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Movies.Migration", "Movies.Migration\Movies.Migration.csproj", "{06C6BF2A-3B61-4AFE-AE1C-1A5F05193103}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp2.Domain", "ConsoleApp2.Domain\ConsoleApp2.Domain.csproj", "{10A5F056-8DD4-4C17-A53B-B48AF4B51139}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp2.Infrastructure.MSAccess", "ConsoleApp2.Infrastructure.MSAccess\ConsoleApp2.Infrastructure.MSAccess.csproj", "{A8E6FE27-84AC-48E3-9631-F303FC2B2296}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp2.Infrastructure.SQLite", "ConsoleApp2.Infrastructure.SQLite\ConsoleApp2.Infrastructure.SQLite.csproj", "{6E924F56-7E02-4396-82D7-29F6BC0F4044}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,6 +68,30 @@ Global
 		{74E2C036-6D37-4313-A02C-CBC1718036DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74E2C036-6D37-4313-A02C-CBC1718036DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74E2C036-6D37-4313-A02C-CBC1718036DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{799D2C29-9678-4FF4-8112-FDC7D9795E68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{799D2C29-9678-4FF4-8112-FDC7D9795E68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{799D2C29-9678-4FF4-8112-FDC7D9795E68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{799D2C29-9678-4FF4-8112-FDC7D9795E68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9280C9B2-6C1E-4562-9107-3D5E10AA2798}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9280C9B2-6C1E-4562-9107-3D5E10AA2798}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9280C9B2-6C1E-4562-9107-3D5E10AA2798}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9280C9B2-6C1E-4562-9107-3D5E10AA2798}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06C6BF2A-3B61-4AFE-AE1C-1A5F05193103}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06C6BF2A-3B61-4AFE-AE1C-1A5F05193103}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06C6BF2A-3B61-4AFE-AE1C-1A5F05193103}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06C6BF2A-3B61-4AFE-AE1C-1A5F05193103}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10A5F056-8DD4-4C17-A53B-B48AF4B51139}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10A5F056-8DD4-4C17-A53B-B48AF4B51139}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10A5F056-8DD4-4C17-A53B-B48AF4B51139}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10A5F056-8DD4-4C17-A53B-B48AF4B51139}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8E6FE27-84AC-48E3-9631-F303FC2B2296}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8E6FE27-84AC-48E3-9631-F303FC2B2296}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8E6FE27-84AC-48E3-9631-F303FC2B2296}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8E6FE27-84AC-48E3-9631-F303FC2B2296}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E924F56-7E02-4396-82D7-29F6BC0F4044}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E924F56-7E02-4396-82D7-29F6BC0F4044}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E924F56-7E02-4396-82D7-29F6BC0F4044}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E924F56-7E02-4396-82D7-29F6BC0F4044}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
