@@ -7,16 +7,16 @@ public record MovieType
     public required YearType Year { get; init; }
     public required CountryType Origin { get; init; }
     public required TimeSpan Duration { get; init; }
-    public required PersonType[] Directors { get; init; }
-    public required PersonType[] Actors { get; init; }
+    public ICollection<PersonType> Directors { get; init; } = [];
+    public ICollection<PersonType> Actors { get; init; } = [];
     public TitleType? OriginalTitle { get; init; }
-    public PersonType[] ScriptWriters { get; init; } = [];
-    public PersonType[] AssistantDirectors { get; init; } = [];
-    public PersonType[] OriginalWriters { get; init; } = [];
-    public PersonType[] Photographers { get; init; } = [];
-    public PersonType[] DialogueWriters { get; init; } = [];
-    public PersonType[] Editing { get; init; } = [];
-    public PersonType[] Music { get; init; } = [];
+    public ICollection<PersonType> ScriptWriters { get; init; } = [];
+    public ICollection<PersonType> AssistantDirectors { get; init; } = [];
+    public ICollection<PersonType> OriginalWriters { get; init; } = [];
+    public ICollection<PersonType> Photographers { get; init; } = [];
+    public ICollection<PersonType> DialogueWriters { get; init; } = [];
+    public ICollection<PersonType> Editing { get; init; } = [];
+    public ICollection<PersonType> Music { get; init; } = [];
 }
 
 public static class Movie

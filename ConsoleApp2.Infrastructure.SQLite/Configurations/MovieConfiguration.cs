@@ -17,86 +17,86 @@ internal sealed class MovieConfiguration : IEntityTypeConfiguration<MovieType>
             .Property(m => m.Id)
             .ValueGeneratedOnAdd();
 
-        // builder
-        //     .HasMany(m => m.Actors)
-        //     .WithMany(m => m.Movies)
-        //     .UsingEntity(
-        //         "ActorMovie",
-        //         l => l.HasOne(typeof(PersonType)).WithMany().HasForeignKey("PersonId").HasPrincipalKey(nameof(PersonType.Id)),
-        //         r => r.HasOne(typeof(MovieType)).WithMany().HasForeignKey("MovieId").HasPrincipalKey(nameof(MovieType.Id)),
-        //         j => j.HasKey("MovieId", "PersonId"));
+        builder
+            .HasMany(m => m.Actors)
+            .WithMany(m => m.MoviesAsActor)
+            .UsingEntity(
+                "ActorMovie",
+                r => r.HasOne(typeof(PersonType)).WithMany().HasForeignKey("PersonId").HasPrincipalKey(nameof(PersonType.Id)),
+                l => l.HasOne(typeof(MovieType)).WithMany().HasForeignKey("MovieId").HasPrincipalKey(nameof(MovieType.Id)),
+                j => j.HasKey("MovieId", "PersonId"));
         
-        // builder
-        //     .HasMany(m => m.Directors)
-        //     .WithMany(m => m.Movies)
-        //     .UsingEntity(
-        //         "DirectorMovie",
-        //         l => l.HasOne(typeof(PersonType)).WithMany().HasForeignKey("PersonId").HasPrincipalKey(nameof(PersonType.Id)),
-        //         r => r.HasOne(typeof(MovieType)).WithMany().HasForeignKey("MovieId").HasPrincipalKey(nameof(MovieType.Id)),
-        //         j => j.HasKey("MovieId", "PersonId"));
-        //
-        // builder
-        //     .HasMany(m => m.ScriptWriters)
-        //     .WithMany(m => m.Movies)
-        //     .UsingEntity(
-        //         "ScriptWriterMovie",
-        //         l => l.HasOne(typeof(PersonType)).WithMany().HasForeignKey("PersonId").HasPrincipalKey(nameof(PersonType.Id)),
-        //         r => r.HasOne(typeof(MovieType)).WithMany().HasForeignKey("MovieId").HasPrincipalKey(nameof(MovieType.Id)),
-        //         j => j.HasKey("MovieId", "PersonId"));
-        //
-        // builder
-        //     .HasMany(m => m.AssistantDirectors)
-        //     .WithMany(m => m.Movies)
-        //     .UsingEntity(
-        //         "AssistantDirectorMovie",
-        //         l => l.HasOne(typeof(PersonType)).WithMany().HasForeignKey("PersonId").HasPrincipalKey(nameof(PersonType.Id)),
-        //         r => r.HasOne(typeof(MovieType)).WithMany().HasForeignKey("MovieId").HasPrincipalKey(nameof(MovieType.Id)),
-        //         j => j.HasKey("MovieId", "PersonId"));
-        //
-        // builder
-        //     .HasMany(m => m.OriginalWriters)
-        //     .WithMany(m => m.Movies)
-        //     .UsingEntity(
-        //         "OriginalWriterMovie",
-        //         l => l.HasOne(typeof(PersonType)).WithMany().HasForeignKey("PersonId").HasPrincipalKey(nameof(PersonType.Id)),
-        //         r => r.HasOne(typeof(MovieType)).WithMany().HasForeignKey("MovieId").HasPrincipalKey(nameof(MovieType.Id)),
-        //         j => j.HasKey("MovieId", "PersonId"));
-        //
-        // builder
-        //     .HasMany(m => m.Photographers)
-        //     .WithMany(m => m.Movies)
-        //     .UsingEntity(
-        //         "PhotographerMovie",
-        //         l => l.HasOne(typeof(PersonType)).WithMany().HasForeignKey("PersonId").HasPrincipalKey(nameof(PersonType.Id)),
-        //         r => r.HasOne(typeof(MovieType)).WithMany().HasForeignKey("MovieId").HasPrincipalKey(nameof(MovieType.Id)),
-        //         j => j.HasKey("MovieId", "PersonId"));
-        //
-        // builder
-        //     .HasMany(m => m.DialogueWriters)
-        //     .WithMany(m => m.Movies)
-        //     .UsingEntity(
-        //         "DialogueWriterMovie",
-        //         l => l.HasOne(typeof(PersonType)).WithMany().HasForeignKey("PersonId").HasPrincipalKey(nameof(PersonType.Id)),
-        //         r => r.HasOne(typeof(MovieType)).WithMany().HasForeignKey("MovieId").HasPrincipalKey(nameof(MovieType.Id)),
-        //         j => j.HasKey("MovieId", "PersonId"));
-        //
-        // builder
-        //     .HasMany(m => m.Editing)
-        //     .WithMany(m => m.Movies)
-        //     .UsingEntity(
-        //         "EditingMovie",
-        //         l => l.HasOne(typeof(PersonType)).WithMany().HasForeignKey("PersonId").HasPrincipalKey(nameof(PersonType.Id)),
-        //         r => r.HasOne(typeof(MovieType)).WithMany().HasForeignKey("MovieId").HasPrincipalKey(nameof(MovieType.Id)),
-        //         j => j.HasKey("MovieId", "PersonId"));
-        //
-        // builder
-        //     .HasMany(m => m.Music)
-        //     .WithMany(m => m.Movies)
-        //     .UsingEntity(
-        //         "MusicMovie",
-        //         l => l.HasOne(typeof(PersonType)).WithMany().HasForeignKey("PersonId").HasPrincipalKey(nameof(PersonType.Id)),
-        //         r => r.HasOne(typeof(MovieType)).WithMany().HasForeignKey("MovieId").HasPrincipalKey(nameof(MovieType.Id)),
-        //         j => j.HasKey("MovieId", "PersonId"));
+        builder
+            .HasMany(m => m.Directors)
+            .WithMany(m => m.MoviesAsDirector)
+            .UsingEntity(
+                "DirectorMovie",
+                l => l.HasOne(typeof(PersonType)).WithMany().HasForeignKey("PersonId").HasPrincipalKey(nameof(PersonType.Id)),
+                r => r.HasOne(typeof(MovieType)).WithMany().HasForeignKey("MovieId").HasPrincipalKey(nameof(MovieType.Id)),
+                j => j.HasKey("MovieId", "PersonId"));
+        
+        builder
+            .HasMany(m => m.ScriptWriters)
+            .WithMany(m => m.MoviesAsScriptWriter)
+            .UsingEntity(
+                "ScriptWriterMovie",
+                l => l.HasOne(typeof(PersonType)).WithMany().HasForeignKey("PersonId").HasPrincipalKey(nameof(PersonType.Id)),
+                r => r.HasOne(typeof(MovieType)).WithMany().HasForeignKey("MovieId").HasPrincipalKey(nameof(MovieType.Id)),
+                j => j.HasKey("MovieId", "PersonId"));
+        
+        builder
+            .HasMany(m => m.AssistantDirectors)
+            .WithMany(m => m.MoviesAsAssistantDirector)
+            .UsingEntity(
+                "AssistantDirectorMovie",
+                l => l.HasOne(typeof(PersonType)).WithMany().HasForeignKey("PersonId").HasPrincipalKey(nameof(PersonType.Id)),
+                r => r.HasOne(typeof(MovieType)).WithMany().HasForeignKey("MovieId").HasPrincipalKey(nameof(MovieType.Id)),
+                j => j.HasKey("MovieId", "PersonId"));
+        
+        builder
+            .HasMany(m => m.OriginalWriters)
+            .WithMany(m => m.MoviesAsOriginalWriter)
+            .UsingEntity(
+                "OriginalWriterMovie",
+                l => l.HasOne(typeof(PersonType)).WithMany().HasForeignKey("PersonId").HasPrincipalKey(nameof(PersonType.Id)),
+                r => r.HasOne(typeof(MovieType)).WithMany().HasForeignKey("MovieId").HasPrincipalKey(nameof(MovieType.Id)),
+                j => j.HasKey("MovieId", "PersonId"));
+        
+        builder
+            .HasMany(m => m.Photographers)
+            .WithMany(m => m.MoviesAsPhotographer)
+            .UsingEntity(
+                "PhotographerMovie",
+                l => l.HasOne(typeof(PersonType)).WithMany().HasForeignKey("PersonId").HasPrincipalKey(nameof(PersonType.Id)),
+                r => r.HasOne(typeof(MovieType)).WithMany().HasForeignKey("MovieId").HasPrincipalKey(nameof(MovieType.Id)),
+                j => j.HasKey("MovieId", "PersonId"));
+        
+        builder
+            .HasMany(m => m.DialogueWriters)
+            .WithMany(m => m.MoviesAsDialogueWriter)
+            .UsingEntity(
+                "DialogueWriterMovie",
+                l => l.HasOne(typeof(PersonType)).WithMany().HasForeignKey("PersonId").HasPrincipalKey(nameof(PersonType.Id)),
+                r => r.HasOne(typeof(MovieType)).WithMany().HasForeignKey("MovieId").HasPrincipalKey(nameof(MovieType.Id)),
+                j => j.HasKey("MovieId", "PersonId"));
+        
+        builder
+            .HasMany(m => m.Editing)
+            .WithMany(m => m.MoviesAsEditing)
+            .UsingEntity(
+                "EditingMovie",
+                l => l.HasOne(typeof(PersonType)).WithMany().HasForeignKey("PersonId").HasPrincipalKey(nameof(PersonType.Id)),
+                r => r.HasOne(typeof(MovieType)).WithMany().HasForeignKey("MovieId").HasPrincipalKey(nameof(MovieType.Id)),
+                j => j.HasKey("MovieId", "PersonId"));
+        
+        builder
+            .HasMany(m => m.Music)
+            .WithMany(m => m.MoviesAsMusic)
+            .UsingEntity(
+                "MusicMovie",
+                l => l.HasOne(typeof(PersonType)).WithMany().HasForeignKey("PersonId").HasPrincipalKey(nameof(PersonType.Id)),
+                r => r.HasOne(typeof(MovieType)).WithMany().HasForeignKey("MovieId").HasPrincipalKey(nameof(MovieType.Id)),
+                j => j.HasKey("MovieId", "PersonId"));
         
         builder
             .Property(a => a.Title)
@@ -121,16 +121,5 @@ internal sealed class MovieConfiguration : IEntityTypeConfiguration<MovieType>
             .HasConversion(
                 ot => ot.Value,
                 ot => Title.Create(ot)!);
-
-        builder
-            .Ignore(m => m.Actors)
-            .Ignore(m => m.Directors)
-            .Ignore(m => m.ScriptWriters)
-            .Ignore(m => m.AssistantDirectors)
-            .Ignore(m => m.OriginalWriters)
-            .Ignore(m => m.Photographers)
-            .Ignore(m => m.DialogueWriters)
-            .Ignore(m => m.Editing)
-            .Ignore(m => m.Music);
     }
 }
